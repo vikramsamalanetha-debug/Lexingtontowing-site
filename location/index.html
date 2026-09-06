@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#111827">
+
+  <title>Share Your Location | Lexington Towing & Recovery</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: Arial, Helvetica, sans-serif;
+      background: #f4f5f7;
+      color: #111827;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .card {
+      width: 100%;
+      max-width: 480px;
+      background: white;
+      border-radius: 18px;
+      padding: 32px 24px;
+      box-shadow: 0 10px 35px rgba(0,0,0,.10);
+      text-align: center;
+    }
+
+    .brand {
+      font-size: 15px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: #555;
+      margin-bottom: 22px;
+    }
+
+    .location-icon {
+      width: 72px;
+      height: 72px;
+      margin: 0 auto 20px;
+      border-radius: 50%;
+      background: #111827;
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 34px;
+    }
+
+    h1 {
+      font-size: 27px;
+      margin: 0 0 14px;
+    }
+
+    p {
+      color: #5b6472;
+      font-size: 16px;
+      line-height: 1.55;
+    }
+
+    .instructions {
+      background: #f8f9fa;
+      border-radius: 12px;
+      padding: 16px;
+      margin: 22px 0;
+      text-align: left;
+      font-size: 14px;
+      color: #4b5563;
+      line-height: 1.6;
+    }
+
+    button {
+      width: 100%;
+      min-height: 58px;
+      border: 0;
+      border-radius: 12px;
+      background: #111827;
+      color: white;
+      font-size: 18px;
+      font-weight: 700;
+      cursor: pointer;
+      padding: 15px;
+    }
+
+    button:disabled {
+      opacity: .55;
+      cursor: not-allowed;
+    }
+
+    #status {
+      display: none;
+      margin-top: 18px;
+      padding: 15px;
+      border-radius: 10px;
+      line-height: 1.45;
+    }
+
+    .working {
+      display: block !important;
+      background: #f3f4f6;
+    }
+
+    .success {
+      display: block !important;
+      background: #ecfdf5;
+      color: #065f46;
+    }
+
+    .error {
+      display: block !important;
+      background: #fef2f2;
+      color: #991b1b;
+    }
+
+    .privacy {
+      margin-top: 22px;
+      font-size: 12px;
+      color: #777;
+      line-height: 1.5;
+    }
+
+    .coordinates {
+      font-family: monospace;
+      margin-top: 8px;
+      font-size: 13px;
+    }
+  </style>
+</head>
+
+<body>
+
+<div class="card">
+
+  <div class="brand">
+    Lexington Towing & Recovery
+  </div>
+
+  <div class="location-icon">⌖</div>
+
+  <h1>Share Your Pickup Location</h1>
+
+  <p>
+    Help our driver find you faster by securely sharing
+    your phone's current GPS location.
+  </p>
+
+  <div class="instructions">
+    <strong>How it works:</strong><br>
+    1. Tap <strong>Share My Location</strong>.<br>
+    2. Your phone will ask for location permission.<br>
+    3. Tap <strong>Allow</strong>.<br>
+    4. We'll locate you using your GPS coordinates.
+  </div>
+
+  <button id="locationButton">
+    Share My Location
+  </button>
+
+  <div id="status"></div>
+
+  <div class="privacy">
+    Your location is only accessed after you give permission.
+    Lexington Towing & Recovery uses it to assist with your
+    towing or roadside service request.
+  </div>
+
+</div>
+
+<script>
+
+const button = document.getElementById("locationButton");
+const statusBox = document.getElementById("status");
+
+button.addEventListener("click", function () {
+
+  if (!navigator.geolocation) {
+    showError(
+      "Location sharing is not supported by this browser."
+    );
+    return;
+  }
+
+  button.disabled = true;
+  button.textContent = "Finding Your Location...";
+
+  statusBox.className = "working";
+  statusBox.textContent =
+    "Please tap Allow when your phone asks for location permission.";
+
+  navigator.geolocation.getCurrentPosition(
+
+    function(position) {
+
+      const latitude = position.coords.latitude;
+      const longitude = position.coords.longitude;
+      const accuracy = Math.round(position.coords.accuracy);
+
+      button.textContent = "Location Found ✓";
+
+      statusBox.className = "success";
+
+      statusBox.innerHTML =
+        "<strong>Your location was found.</strong><br>" +
+        "<div class='coordinates'>" +
+        latitude.toFixed(6) +
+        ", " +
+        longitude.toFixed(6) +
+        "</div>" +
+        "<br>GPS accuracy: approximately " +
+        accuracy +
+        " meters.";
+
+    },
+
+    function(error) {
+
+      button.disabled = false;
+      button.textContent = "Try Again";
+
+      if (error.code === 1) {
+        showError(
+          "Location permission was denied. Please allow location access and try again."
+        );
+      }
+      else if (error.code === 2) {
+        showError(
+          "Your phone could not determine your location. Please try again."
+        );
+      }
+      else if (error.code === 3) {
+        showError(
+          "The GPS request timed out. Please try again."
+        );
+      }
+      else {
+        showError(
+          "We could not determine your location."
+        );
+      }
+
+    },
+
+    {
+      enableHighAccuracy: true,
+      timeout: 15000,
+      maximumAge: 0
+    }
+
+  );
+
+});
+
+function showError(message) {
+  statusBox.className = "error";
+  statusBox.textContent = message;
+}
+
+</script>
+
+</body>
+</html>
