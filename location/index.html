@@ -3,8 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#ff6b1a">
 <meta name="robots" content="noindex">
-<title>Send Your Location — Lexington Towing &amp; Recovery</title>
+<title>Share Your Location — Lexington Towing &amp; Recovery</title>
 <style>
   :root{
     --orange:#ff6b1a;
@@ -19,225 +20,119 @@
     --line:#f0e3d4;
   }
   *{box-sizing:border-box}
+  html,body{height:100%}
   body{
-    margin:0;
-    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
-    background:var(--bg);
-    color:var(--ink);
+    margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    background:var(--bg);color:var(--ink);
+    display:flex;align-items:center;justify-content:center;padding:20px;
     -webkit-text-size-adjust:100%;
   }
-  .wrap{max-width:520px;margin:0 auto;padding:20px 18px 40px}
-  header{text-align:center;padding:18px 0 10px}
-  .badge{
-    display:inline-block;background:var(--yellow);color:#4a2d00;
-    font-weight:700;font-size:13px;letter-spacing:.5px;
-    padding:5px 12px;border-radius:999px;margin-bottom:12px;text-transform:uppercase;
-  }
-  h1{font-size:24px;margin:6px 0 4px;line-height:1.2}
-  .sub{color:var(--muted);font-size:15px;margin:0}
-  .callbar{
-    display:flex;align-items:center;justify-content:center;gap:8px;
-    margin:16px 0 0;font-size:16px;
-  }
-  .callbar a{color:var(--orange-dark);font-weight:700;text-decoration:none}
   .card{
-    background:var(--card);border:1px solid var(--line);border-radius:16px;
-    padding:20px 18px;margin-top:18px;box-shadow:0 2px 10px rgba(0,0,0,.04);
+    width:100%;max-width:460px;background:var(--card);border:1px solid var(--line);
+    border-radius:18px;padding:30px 24px;text-align:center;box-shadow:0 8px 28px rgba(0,0,0,.07);
   }
-  .step-title{font-size:13px;font-weight:700;color:var(--orange-dark);text-transform:uppercase;letter-spacing:.5px;margin:0 0 10px}
-  label{display:block;font-size:14px;font-weight:600;margin:12px 0 5px}
-  input,select{
-    width:100%;padding:13px 12px;font-size:16px;border:1px solid #ddd;border-radius:10px;
-    background:#fff;color:var(--ink);
+  .badge{
+    display:inline-block;background:var(--yellow);color:#4a2d00;font-weight:700;font-size:12px;
+    letter-spacing:.5px;padding:5px 12px;border-radius:999px;text-transform:uppercase;
   }
-  input:focus,select:focus{outline:none;border-color:var(--orange)}
-  .row{display:flex;gap:10px}
-  .row>div{flex:1}
+  .pin-icon{
+    width:76px;height:76px;margin:18px auto 14px;border-radius:50%;
+    background:var(--orange);color:#fff;display:flex;align-items:center;justify-content:center;font-size:36px;
+  }
+  h1{font-size:25px;margin:0 0 10px}
+  p{color:var(--muted);font-size:16px;line-height:1.55;margin:0 0 6px}
   button{
-    width:100%;font-size:18px;font-weight:700;border:none;border-radius:12px;
-    padding:16px;cursor:pointer;margin-top:16px;color:#fff;
+    width:100%;min-height:60px;border:0;border-radius:13px;background:var(--orange);color:#fff;
+    font-size:19px;font-weight:700;cursor:pointer;padding:16px;margin-top:22px;
   }
-  .btn-primary{background:var(--orange)}
-  .btn-primary:active{background:var(--orange-dark)}
-  .btn-send{background:var(--ok);font-size:19px}
-  .btn-send:disabled{background:#bdbdbd;cursor:not-allowed}
-  .btn-ghost{background:#fff;color:var(--orange-dark);border:2px solid var(--orange)}
-  .status{margin-top:14px;font-size:15px;padding:12px;border-radius:10px;display:none}
+  button:active{background:var(--orange-dark)}
+  button:disabled{opacity:.6;cursor:not-allowed}
+  .status{display:none;margin-top:18px;padding:15px;border-radius:11px;font-size:15px;line-height:1.5}
   .status.show{display:block}
-  .status.ok{background:#eafaef;color:var(--ok);border:1px solid #bfe6cc}
-  .status.err{background:#fdecea;color:var(--err);border:1px solid #f5c6c0}
-  .status.wait{background:#fff6e6;color:#8a5a00;border:1px solid #f0dcb0}
-  .pin{margin-top:12px;font-size:14px;color:var(--muted);word-break:break-all}
-  .pin a{color:var(--orange-dark);font-weight:600}
-  .hidden{display:none}
-  .mini{font-size:13px;color:var(--muted);text-align:center;margin-top:10px}
-  footer{text-align:center;margin-top:26px;font-size:12px;color:#9a9a9a}
-  footer a{color:#9a9a9a}
+  .wait{background:#fff6e6;color:#8a5a00;border:1px solid #f0dcb0}
+  .ok{background:#eafaef;color:var(--ok);border:1px solid #bfe6cc}
+  .err{background:#fdecea;color:var(--err);border:1px solid #f5c6c0}
+  .callline{margin-top:20px;font-size:15px;color:var(--muted)}
+  .callline a{color:var(--orange-dark);font-weight:700;text-decoration:none}
+  .privacy{margin-top:18px;font-size:12px;color:#8a9099;line-height:1.5}
+  footer{margin-top:22px;font-size:12px;color:#aab0b8}
+  footer a{color:#aab0b8}
 </style>
 </head>
 <body>
-<div class="wrap">
-  <header>
-    <div class="badge">24/7 Emergency Towing</div>
-    <h1>Lexington Towing &amp; Recovery</h1>
-    <p class="sub">Stranded? Send us your exact spot and we'll roll a truck your way.</p>
-    <div class="callbar">
-      <span>Or call us:</span><a href="tel:+19012370047">(901) 237-0047</a>
-    </div>
-  </header>
+<div class="card">
+  <span class="badge">24/7 Emergency Towing</span>
+  <div class="pin-icon">📍</div>
+  <h1>Share Your Location</h1>
+  <p>Tap below so Lexington Towing &amp; Recovery can see exactly where you are and send a truck your way.</p>
 
-  <!-- STEP 1: details -->
-  <div class="card">
-    <p class="step-title">Step 1 &middot; Who &amp; what</p>
-    <label for="name">Your name</label>
-    <input id="name" type="text" autocomplete="name" placeholder="First and last name">
+  <button id="shareBtn" type="button">Share my location</button>
 
-    <label for="phone">Best callback number</label>
-    <input id="phone" type="tel" autocomplete="tel" placeholder="(000) 000-0000">
+  <div id="status" class="status"></div>
 
-    <div class="row">
-      <div>
-        <label for="vehicle">Vehicle</label>
-        <input id="vehicle" type="text" placeholder="Year make model">
-      </div>
-      <div>
-        <label for="color">Color</label>
-        <input id="color" type="text" placeholder="e.g. black">
-      </div>
-    </div>
+  <div class="callline">Prefer to talk? Call <a href="tel:+19012370047">(901)&nbsp;237-0047</a></div>
+  <div class="privacy">Your location is only accessed after you tap Allow, and is used solely to dispatch your tow. We don't track you.</div>
 
-    <label for="problem">What's going on?</label>
-    <select id="problem">
-      <option value="">Select one…</option>
-      <option>Won't start / dead</option>
-      <option>Flat tire</option>
-      <option>Accident / collision</option>
-      <option>Locked out</option>
-      <option>Out of gas</option>
-      <option>Stuck / off-road</option>
-      <option>Need a tow — other</option>
-    </select>
-  </div>
-
-  <!-- STEP 2: location -->
-  <div class="card">
-    <p class="step-title">Step 2 &middot; Share your location</p>
-    <p class="sub" style="font-size:14px">Tap the button below. Your phone will ask permission to share your location — tap <b>Allow</b>. We only grab your spot once; we're not tracking you.</p>
-
-    <button id="locateBtn" class="btn-primary" type="button">📍 Get my location</button>
-
-    <div id="statusWait" class="status wait">Finding your location… keep this page open.</div>
-    <div id="statusOk" class="status ok">✓ Got it! Your location is ready to send.</div>
-    <div id="statusErr" class="status err"></div>
-
-    <div id="pinBox" class="pin hidden">
-      Your spot: <a id="mapLink" href="#" target="_blank" rel="noopener">view on map</a>
-    </div>
-  </div>
-
-  <!-- STEP 3: send -->
-  <div class="card" id="sendCard">
-    <p class="step-title">Step 3 &middot; Send to dispatch</p>
-    <button id="sendBtn" class="btn-send" type="button" disabled>Send to dispatch →</button>
-    <p class="mini">Opens a pre-filled text to (901) 237-0047. Just hit send.</p>
-    <button id="copyBtn" class="btn-ghost hidden" type="button">Copy my details instead</button>
-    <div id="copyMsg" class="status ok" style="margin-top:10px"></div>
-  </div>
-
-  <footer>
-    A product of <a href="https://www.litamerica.net" target="_blank" rel="noopener">LIT America</a>
-  </footer>
+  <footer>A product of <a href="https://www.litamerica.net" target="_blank" rel="noopener">LIT America</a></footer>
 </div>
 
 <script>
 (function(){
-  var DISPATCH = "+19012370047";
-  var coords = null;
+  var NTFY_TOPIC = 'lexingtontowing-dispatch-7k2m9x';
+  var btn = document.getElementById('shareBtn');
+  var statusBox = document.getElementById('status');
 
-  var $ = function(id){ return document.getElementById(id); };
-  var locateBtn = $("locateBtn"),
-      sendBtn   = $("sendBtn"),
-      copyBtn   = $("copyBtn"),
-      sWait = $("statusWait"), sOk = $("statusOk"), sErr = $("statusErr"),
-      pinBox = $("pinBox"), mapLink = $("mapLink"), copyMsg = $("copyMsg");
+  function setStatus(cls, html){ statusBox.className = 'status show ' + cls; statusBox.innerHTML = html; }
 
-  function show(el){ el.classList.add("show"); }
-  function hide(el){ el.classList.remove("show"); }
+  btn.addEventListener('click', function(){
+    if(!navigator.geolocation){
+      setStatus('err', "This browser can't share location. Please call us at (901) 237-0047.");
+      return;
+    }
+    btn.disabled = true;
+    btn.textContent = 'Finding you…';
+    setStatus('wait', 'Tap <b>Allow</b> when your phone asks for location permission.');
 
-  function buildMessage(){
-    var name = $("name").value.trim();
-    var phone = $("phone").value.trim();
-    var vehicle = $("vehicle").value.trim();
-    var color = $("color").value.trim();
-    var problem = $("problem").value.trim();
-    var veh = [vehicle, color].filter(Boolean).join(", ");
-    var maps = coords ? ("https://www.google.com/maps/search/?api=1&query=" + coords.lat + "," + coords.lng) : "";
+    navigator.geolocation.getCurrentPosition(onFound, onError, {
+      enableHighAccuracy:true, timeout:15000, maximumAge:0
+    });
+  });
 
-    var lines = ["TOW REQUEST - Lexington Towing"];
-    if(name)    lines.push("Name: " + name);
-    if(phone)   lines.push("Phone: " + phone);
-    if(veh)     lines.push("Vehicle: " + veh);
-    if(problem) lines.push("Problem: " + problem);
-    if(maps)    lines.push("Location: " + maps);
-    if(coords && coords.acc) lines.push("(accuracy ~" + Math.round(coords.acc) + "m)");
-    return lines.join("\n");
+  function onFound(pos){
+    var lat = pos.coords.latitude.toFixed(6);
+    var lon = pos.coords.longitude.toFixed(6);
+    var acc = Math.round(pos.coords.accuracy);
+    var mapsLink = 'https://maps.google.com/?q=' + lat + ',' + lon;
+
+    var body = 'A customer opened the tow link and shared their location.\n' +
+               'Map: ' + mapsLink + '\n' +
+               'Accuracy: ~' + acc + 'm';
+
+    fetch('https://ntfy.sh/' + NTFY_TOPIC, {
+      method:'POST',
+      headers:{ 'Title':'Customer location shared', 'Tags':'round_pushpin,rotating_light', 'Priority':'high' },
+      body: body
+    }).then(function(res){
+      if(!res.ok) throw new Error('bad status');
+      btn.textContent = 'Location sent ✓';
+      setStatus('ok', "<b>Got it — we see your location.</b><br>Hang tight, we're dispatching a truck. Keep your phone handy in case our driver needs to reach you.");
+    }).catch(function(){
+      // Notification didn't go through — don't leave the customer thinking it did.
+      btn.disabled = false;
+      btn.textContent = 'Try again';
+      setStatus('err', "We found your location but couldn't send it automatically. Please call us at <a href='tel:+19012370047'>(901) 237-0047</a> and we'll get you sorted.");
+    });
   }
 
-  locateBtn.addEventListener("click", function(){
-    hide(sOk); hide(sErr); sErr.textContent = "";
-    if(!("geolocation" in navigator)){
-      sErr.textContent = "This phone/browser can't share location. Please call us at (901) 237-0047.";
-      show(sErr); return;
-    }
-    show(sWait);
-    locateBtn.textContent = "📍 Locating…";
-    navigator.geolocation.getCurrentPosition(
-      function(pos){
-        hide(sWait);
-        coords = { lat: pos.coords.latitude.toFixed(6), lng: pos.coords.longitude.toFixed(6), acc: pos.coords.accuracy };
-        var maps = "https://www.google.com/maps/search/?api=1&query=" + coords.lat + "," + coords.lng;
-        mapLink.href = maps;
-        pinBox.classList.remove("hidden");
-        show(sOk);
-        locateBtn.textContent = "📍 Update my location";
-        sendBtn.disabled = false;
-        copyBtn.classList.remove("hidden");
-      },
-      function(err){
-        hide(sWait);
-        locateBtn.textContent = "📍 Try again";
-        var msg;
-        if(err.code === 1) msg = "Location permission was blocked. Open your browser settings to allow location, or call us at (901) 237-0047.";
-        else if(err.code === 2) msg = "Couldn't pin your location. Try again in an open area, or call (901) 237-0047.";
-        else if(err.code === 3) msg = "Timed out finding you. Tap try again, or call (901) 237-0047.";
-        else msg = "Something went wrong. Please call us at (901) 237-0047.";
-        sErr.textContent = msg;
-        show(sErr);
-      },
-      { enableHighAccuracy:true, timeout:15000, maximumAge:0 }
-    );
-  });
-
-  sendBtn.addEventListener("click", function(){
-    if(!coords) return;
-    var body = encodeURIComponent(buildMessage());
-    // Cross-platform SMS prefill (iOS + Android)
-    window.location.href = "sms:" + DISPATCH + "?&body=" + body;
-  });
-
-  copyBtn.addEventListener("click", function(){
-    var text = buildMessage();
-    var done = function(){ copyMsg.textContent = "Copied — paste it into a text or email to us."; show(copyMsg); };
-    if(navigator.clipboard && navigator.clipboard.writeText){
-      navigator.clipboard.writeText(text).then(done, function(){ fallbackCopy(text, done); });
-    } else { fallbackCopy(text, done); }
-  });
-
-  function fallbackCopy(text, done){
-    var ta = document.createElement("textarea");
-    ta.value = text; document.body.appendChild(ta); ta.select();
-    try{ document.execCommand("copy"); done(); }catch(e){ copyMsg.textContent="Couldn't copy automatically — please call (901) 237-0047."; show(copyMsg); }
-    document.body.removeChild(ta);
+  function onError(err){
+    btn.disabled = false;
+    btn.textContent = 'Try again';
+    var msg;
+    if(err.code === 1)      msg = "Location permission was blocked. Allow location in your browser settings, or call (901) 237-0047.";
+    else if(err.code === 2) msg = "Couldn't pin your location. Try again in an open area, or call (901) 237-0047.";
+    else if(err.code === 3) msg = "Timed out finding you. Tap try again, or call (901) 237-0047.";
+    else                    msg = "Something went wrong. Please call us at (901) 237-0047.";
+    setStatus('err', msg);
   }
 })();
 </script>
