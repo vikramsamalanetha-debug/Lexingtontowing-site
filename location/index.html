@@ -1,270 +1,245 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#111827">
-
-  <title>Share Your Location | Lexington Towing & Recovery</title>
-
-  <style>
-    * {
-      box-sizing: border-box;
-    }
-
-    body {
-      margin: 0;
-      min-height: 100vh;
-      font-family: Arial, Helvetica, sans-serif;
-      background: #f4f5f7;
-      color: #111827;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 20px;
-    }
-
-    .card {
-      width: 100%;
-      max-width: 480px;
-      background: white;
-      border-radius: 18px;
-      padding: 32px 24px;
-      box-shadow: 0 10px 35px rgba(0,0,0,.10);
-      text-align: center;
-    }
-
-    .brand {
-      font-size: 15px;
-      font-weight: 700;
-      letter-spacing: 1px;
-      text-transform: uppercase;
-      color: #555;
-      margin-bottom: 22px;
-    }
-
-    .location-icon {
-      width: 72px;
-      height: 72px;
-      margin: 0 auto 20px;
-      border-radius: 50%;
-      background: #111827;
-      color: white;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 34px;
-    }
-
-    h1 {
-      font-size: 27px;
-      margin: 0 0 14px;
-    }
-
-    p {
-      color: #5b6472;
-      font-size: 16px;
-      line-height: 1.55;
-    }
-
-    .instructions {
-      background: #f8f9fa;
-      border-radius: 12px;
-      padding: 16px;
-      margin: 22px 0;
-      text-align: left;
-      font-size: 14px;
-      color: #4b5563;
-      line-height: 1.6;
-    }
-
-    button {
-      width: 100%;
-      min-height: 58px;
-      border: 0;
-      border-radius: 12px;
-      background: #111827;
-      color: white;
-      font-size: 18px;
-      font-weight: 700;
-      cursor: pointer;
-      padding: 15px;
-    }
-
-    button:disabled {
-      opacity: .55;
-      cursor: not-allowed;
-    }
-
-    #status {
-      display: none;
-      margin-top: 18px;
-      padding: 15px;
-      border-radius: 10px;
-      line-height: 1.45;
-    }
-
-    .working {
-      display: block !important;
-      background: #f3f4f6;
-    }
-
-    .success {
-      display: block !important;
-      background: #ecfdf5;
-      color: #065f46;
-    }
-
-    .error {
-      display: block !important;
-      background: #fef2f2;
-      color: #991b1b;
-    }
-
-    .privacy {
-      margin-top: 22px;
-      font-size: 12px;
-      color: #777;
-      line-height: 1.5;
-    }
-
-    .coordinates {
-      font-family: monospace;
-      margin-top: 8px;
-      font-size: 13px;
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex">
+<title>Send Your Location — Lexington Towing &amp; Recovery</title>
+<style>
+  :root{
+    --orange:#ff6b1a;
+    --orange-dark:#e05a0f;
+    --yellow:#ffb800;
+    --ink:#232323;
+    --muted:#5a6169;
+    --bg:#faf8f4;
+    --card:#ffffff;
+    --ok:#1b8a3f;
+    --err:#c0392b;
+    --line:#f0e3d4;
+  }
+  *{box-sizing:border-box}
+  body{
+    margin:0;
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    background:var(--bg);
+    color:var(--ink);
+    -webkit-text-size-adjust:100%;
+  }
+  .wrap{max-width:520px;margin:0 auto;padding:20px 18px 40px}
+  header{text-align:center;padding:18px 0 10px}
+  .badge{
+    display:inline-block;background:var(--yellow);color:#4a2d00;
+    font-weight:700;font-size:13px;letter-spacing:.5px;
+    padding:5px 12px;border-radius:999px;margin-bottom:12px;text-transform:uppercase;
+  }
+  h1{font-size:24px;margin:6px 0 4px;line-height:1.2}
+  .sub{color:var(--muted);font-size:15px;margin:0}
+  .callbar{
+    display:flex;align-items:center;justify-content:center;gap:8px;
+    margin:16px 0 0;font-size:16px;
+  }
+  .callbar a{color:var(--orange-dark);font-weight:700;text-decoration:none}
+  .card{
+    background:var(--card);border:1px solid var(--line);border-radius:16px;
+    padding:20px 18px;margin-top:18px;box-shadow:0 2px 10px rgba(0,0,0,.04);
+  }
+  .step-title{font-size:13px;font-weight:700;color:var(--orange-dark);text-transform:uppercase;letter-spacing:.5px;margin:0 0 10px}
+  label{display:block;font-size:14px;font-weight:600;margin:12px 0 5px}
+  input,select{
+    width:100%;padding:13px 12px;font-size:16px;border:1px solid #ddd;border-radius:10px;
+    background:#fff;color:var(--ink);
+  }
+  input:focus,select:focus{outline:none;border-color:var(--orange)}
+  .row{display:flex;gap:10px}
+  .row>div{flex:1}
+  button{
+    width:100%;font-size:18px;font-weight:700;border:none;border-radius:12px;
+    padding:16px;cursor:pointer;margin-top:16px;color:#fff;
+  }
+  .btn-primary{background:var(--orange)}
+  .btn-primary:active{background:var(--orange-dark)}
+  .btn-send{background:var(--ok);font-size:19px}
+  .btn-send:disabled{background:#bdbdbd;cursor:not-allowed}
+  .btn-ghost{background:#fff;color:var(--orange-dark);border:2px solid var(--orange)}
+  .status{margin-top:14px;font-size:15px;padding:12px;border-radius:10px;display:none}
+  .status.show{display:block}
+  .status.ok{background:#eafaef;color:var(--ok);border:1px solid #bfe6cc}
+  .status.err{background:#fdecea;color:var(--err);border:1px solid #f5c6c0}
+  .status.wait{background:#fff6e6;color:#8a5a00;border:1px solid #f0dcb0}
+  .pin{margin-top:12px;font-size:14px;color:var(--muted);word-break:break-all}
+  .pin a{color:var(--orange-dark);font-weight:600}
+  .hidden{display:none}
+  .mini{font-size:13px;color:var(--muted);text-align:center;margin-top:10px}
+  footer{text-align:center;margin-top:26px;font-size:12px;color:#9a9a9a}
+  footer a{color:#9a9a9a}
+</style>
 </head>
-
 <body>
+<div class="wrap">
+  <header>
+    <div class="badge">24/7 Emergency Towing</div>
+    <h1>Lexington Towing &amp; Recovery</h1>
+    <p class="sub">Stranded? Send us your exact spot and we'll roll a truck your way.</p>
+    <div class="callbar">
+      <span>Or call us:</span><a href="tel:+19012370047">(901) 237-0047</a>
+    </div>
+  </header>
 
-<div class="card">
+  <!-- STEP 1: details -->
+  <div class="card">
+    <p class="step-title">Step 1 &middot; Who &amp; what</p>
+    <label for="name">Your name</label>
+    <input id="name" type="text" autocomplete="name" placeholder="First and last name">
 
-  <div class="brand">
-    Lexington Towing & Recovery
+    <label for="phone">Best callback number</label>
+    <input id="phone" type="tel" autocomplete="tel" placeholder="(000) 000-0000">
+
+    <div class="row">
+      <div>
+        <label for="vehicle">Vehicle</label>
+        <input id="vehicle" type="text" placeholder="Year make model">
+      </div>
+      <div>
+        <label for="color">Color</label>
+        <input id="color" type="text" placeholder="e.g. black">
+      </div>
+    </div>
+
+    <label for="problem">What's going on?</label>
+    <select id="problem">
+      <option value="">Select one…</option>
+      <option>Won't start / dead</option>
+      <option>Flat tire</option>
+      <option>Accident / collision</option>
+      <option>Locked out</option>
+      <option>Out of gas</option>
+      <option>Stuck / off-road</option>
+      <option>Need a tow — other</option>
+    </select>
   </div>
 
-  <div class="location-icon">⌖</div>
+  <!-- STEP 2: location -->
+  <div class="card">
+    <p class="step-title">Step 2 &middot; Share your location</p>
+    <p class="sub" style="font-size:14px">Tap the button below. Your phone will ask permission to share your location — tap <b>Allow</b>. We only grab your spot once; we're not tracking you.</p>
 
-  <h1>Share Your Pickup Location</h1>
+    <button id="locateBtn" class="btn-primary" type="button">📍 Get my location</button>
 
-  <p>
-    Help our driver find you faster by securely sharing
-    your phone's current GPS location.
-  </p>
+    <div id="statusWait" class="status wait">Finding your location… keep this page open.</div>
+    <div id="statusOk" class="status ok">✓ Got it! Your location is ready to send.</div>
+    <div id="statusErr" class="status err"></div>
 
-  <div class="instructions">
-    <strong>How it works:</strong><br>
-    1. Tap <strong>Share My Location</strong>.<br>
-    2. Your phone will ask for location permission.<br>
-    3. Tap <strong>Allow</strong>.<br>
-    4. We'll locate you using your GPS coordinates.
+    <div id="pinBox" class="pin hidden">
+      Your spot: <a id="mapLink" href="#" target="_blank" rel="noopener">view on map</a>
+    </div>
   </div>
 
-  <button id="locationButton">
-    Share My Location
-  </button>
-
-  <div id="status"></div>
-
-  <div class="privacy">
-    Your location is only accessed after you give permission.
-    Lexington Towing & Recovery uses it to assist with your
-    towing or roadside service request.
+  <!-- STEP 3: send -->
+  <div class="card" id="sendCard">
+    <p class="step-title">Step 3 &middot; Send to dispatch</p>
+    <button id="sendBtn" class="btn-send" type="button" disabled>Send to dispatch →</button>
+    <p class="mini">Opens a pre-filled text to (901) 237-0047. Just hit send.</p>
+    <button id="copyBtn" class="btn-ghost hidden" type="button">Copy my details instead</button>
+    <div id="copyMsg" class="status ok" style="margin-top:10px"></div>
   </div>
 
+  <footer>
+    A product of <a href="https://www.litamerica.net" target="_blank" rel="noopener">LIT America</a>
+  </footer>
 </div>
 
 <script>
+(function(){
+  var DISPATCH = "+19012370047";
+  var coords = null;
 
-const button = document.getElementById("locationButton");
-const statusBox = document.getElementById("status");
+  var $ = function(id){ return document.getElementById(id); };
+  var locateBtn = $("locateBtn"),
+      sendBtn   = $("sendBtn"),
+      copyBtn   = $("copyBtn"),
+      sWait = $("statusWait"), sOk = $("statusOk"), sErr = $("statusErr"),
+      pinBox = $("pinBox"), mapLink = $("mapLink"), copyMsg = $("copyMsg");
 
-button.addEventListener("click", function () {
+  function show(el){ el.classList.add("show"); }
+  function hide(el){ el.classList.remove("show"); }
 
-  if (!navigator.geolocation) {
-    showError(
-      "Location sharing is not supported by this browser."
-    );
-    return;
+  function buildMessage(){
+    var name = $("name").value.trim();
+    var phone = $("phone").value.trim();
+    var vehicle = $("vehicle").value.trim();
+    var color = $("color").value.trim();
+    var problem = $("problem").value.trim();
+    var veh = [vehicle, color].filter(Boolean).join(", ");
+    var maps = coords ? ("https://www.google.com/maps/search/?api=1&query=" + coords.lat + "," + coords.lng) : "";
+
+    var lines = ["TOW REQUEST - Lexington Towing"];
+    if(name)    lines.push("Name: " + name);
+    if(phone)   lines.push("Phone: " + phone);
+    if(veh)     lines.push("Vehicle: " + veh);
+    if(problem) lines.push("Problem: " + problem);
+    if(maps)    lines.push("Location: " + maps);
+    if(coords && coords.acc) lines.push("(accuracy ~" + Math.round(coords.acc) + "m)");
+    return lines.join("\n");
   }
 
-  button.disabled = true;
-  button.textContent = "Finding Your Location...";
-
-  statusBox.className = "working";
-  statusBox.textContent =
-    "Please tap Allow when your phone asks for location permission.";
-
-  navigator.geolocation.getCurrentPosition(
-
-    function(position) {
-
-      const latitude = position.coords.latitude;
-      const longitude = position.coords.longitude;
-      const accuracy = Math.round(position.coords.accuracy);
-
-      button.textContent = "Location Found ✓";
-
-      statusBox.className = "success";
-
-      statusBox.innerHTML =
-        "<strong>Your location was found.</strong><br>" +
-        "<div class='coordinates'>" +
-        latitude.toFixed(6) +
-        ", " +
-        longitude.toFixed(6) +
-        "</div>" +
-        "<br>GPS accuracy: approximately " +
-        accuracy +
-        " meters.";
-
-    },
-
-    function(error) {
-
-      button.disabled = false;
-      button.textContent = "Try Again";
-
-      if (error.code === 1) {
-        showError(
-          "Location permission was denied. Please allow location access and try again."
-        );
-      }
-      else if (error.code === 2) {
-        showError(
-          "Your phone could not determine your location. Please try again."
-        );
-      }
-      else if (error.code === 3) {
-        showError(
-          "The GPS request timed out. Please try again."
-        );
-      }
-      else {
-        showError(
-          "We could not determine your location."
-        );
-      }
-
-    },
-
-    {
-      enableHighAccuracy: true,
-      timeout: 15000,
-      maximumAge: 0
+  locateBtn.addEventListener("click", function(){
+    hide(sOk); hide(sErr); sErr.textContent = "";
+    if(!("geolocation" in navigator)){
+      sErr.textContent = "This phone/browser can't share location. Please call us at (901) 237-0047.";
+      show(sErr); return;
     }
+    show(sWait);
+    locateBtn.textContent = "📍 Locating…";
+    navigator.geolocation.getCurrentPosition(
+      function(pos){
+        hide(sWait);
+        coords = { lat: pos.coords.latitude.toFixed(6), lng: pos.coords.longitude.toFixed(6), acc: pos.coords.accuracy };
+        var maps = "https://www.google.com/maps/search/?api=1&query=" + coords.lat + "," + coords.lng;
+        mapLink.href = maps;
+        pinBox.classList.remove("hidden");
+        show(sOk);
+        locateBtn.textContent = "📍 Update my location";
+        sendBtn.disabled = false;
+        copyBtn.classList.remove("hidden");
+      },
+      function(err){
+        hide(sWait);
+        locateBtn.textContent = "📍 Try again";
+        var msg;
+        if(err.code === 1) msg = "Location permission was blocked. Open your browser settings to allow location, or call us at (901) 237-0047.";
+        else if(err.code === 2) msg = "Couldn't pin your location. Try again in an open area, or call (901) 237-0047.";
+        else if(err.code === 3) msg = "Timed out finding you. Tap try again, or call (901) 237-0047.";
+        else msg = "Something went wrong. Please call us at (901) 237-0047.";
+        sErr.textContent = msg;
+        show(sErr);
+      },
+      { enableHighAccuracy:true, timeout:15000, maximumAge:0 }
+    );
+  });
 
-  );
+  sendBtn.addEventListener("click", function(){
+    if(!coords) return;
+    var body = encodeURIComponent(buildMessage());
+    // Cross-platform SMS prefill (iOS + Android)
+    window.location.href = "sms:" + DISPATCH + "?&body=" + body;
+  });
 
-});
+  copyBtn.addEventListener("click", function(){
+    var text = buildMessage();
+    var done = function(){ copyMsg.textContent = "Copied — paste it into a text or email to us."; show(copyMsg); };
+    if(navigator.clipboard && navigator.clipboard.writeText){
+      navigator.clipboard.writeText(text).then(done, function(){ fallbackCopy(text, done); });
+    } else { fallbackCopy(text, done); }
+  });
 
-function showError(message) {
-  statusBox.className = "error";
-  statusBox.textContent = message;
-}
-
+  function fallbackCopy(text, done){
+    var ta = document.createElement("textarea");
+    ta.value = text; document.body.appendChild(ta); ta.select();
+    try{ document.execCommand("copy"); done(); }catch(e){ copyMsg.textContent="Couldn't copy automatically — please call (901) 237-0047."; show(copyMsg); }
+    document.body.removeChild(ta);
+  }
+})();
 </script>
-
 </body>
 </html>
